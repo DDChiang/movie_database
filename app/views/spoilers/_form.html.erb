@@ -1,0 +1,29 @@
+<%= form_for(@spoiler) do |f| %>
+  <% if @spoiler.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@spoiler.errors.count, "error") %> prohibited this spoiler from being saved:</h2>
+
+      <ul>
+      <% @spoiler.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :movie_id %><br>
+    <%= f.number_field :movie_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :synopsis %><br>
+    <%= f.text_area :synopsis %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

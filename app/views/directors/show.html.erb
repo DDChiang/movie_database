@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First:</strong>
+  <%= @director.first %>
+</p>
+
+<p>
+  <strong>Last:</strong>
+  <%= @director.last %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @director.slug %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @director.approved %>
+</p>
+
+<p>
+  <strong>Birthday:</strong>
+  <%= @director.birthday %>
+</p>
+
+<%= link_to 'Edit', edit_director_path(@director) %> |
+<%= link_to 'Back', directors_path %>

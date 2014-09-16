@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  opening_day: 2014-09-16
+  teaser: MyText
+  user_id: 1
+  slug: MyString
+
+two:
+  name: MyString
+  opening_day: 2014-09-16
+  teaser: MyText
+  user_id: 1
+  slug: MyString

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Movie:</strong>
+  <%= @spoiler.movie_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @spoiler.user_id %>
+</p>
+
+<p>
+  <strong>Synopsis:</strong>
+  <%= @spoiler.synopsis %>
+</p>
+
+<%= link_to 'Edit', edit_spoiler_path(@spoiler) %> |
+<%= link_to 'Back', spoilers_path %>

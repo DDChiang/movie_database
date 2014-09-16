@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first: MyString
+  last: MyString
+  slug: MyString
+  approved: false
+  birthday: 2014-09-16
+
+two:
+  first: MyString
+  last: MyString
+  slug: MyString
+  approved: false
+  birthday: 2014-09-16
