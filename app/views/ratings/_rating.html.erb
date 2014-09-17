@@ -1,0 +1,18 @@
+<div id="rating">
+  <div id="rating_value">
+    <%= rating.value %>
+  </div>
+  <div id="review">
+    <%= rating.review %>
+  </div>
+  <div id="rating_info">
+    <%= rating.created_at %> 
+    <% u = rating.user %>
+    <%= u.nil? %>
+  </div>
+  <% if current_user != nil && rating.user != nil && current_user.id == rating.user.id %>
+    <%= link_to "edit", edit_rating_path(rating) %>
+  <% end %>
+    <%= link_to "delete", rating_path, :id => rating,  method: :delete, data: { confirm: "Are you sure?"} %>
+</div>
+next

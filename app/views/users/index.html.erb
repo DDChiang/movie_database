@@ -3,9 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th>Uid</th>
-      <th>Provider</th>
-      <th>Chosen name</th>
+      <th>Username</th>
       <th>Description</th>
       <th colspan="3"></th>
     </tr>
@@ -14,8 +12,6 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.uid %></td>
-        <td><%= user.provider %></td>
         <td><%= user.chosen_name %></td>
         <td><%= user.description %></td>
         <td><%= link_to 'Show', user %></td>

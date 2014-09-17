@@ -7,8 +7,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. Not you?
+    <%= link_to 'Sign out', destroy_user_session_path,:method => :delete %>
+    <%= link_to "Settings", edit_user_registration_path %>
+    <%= link_to "Profile", user_path(current_user) %>
+    <%= raw(Glogs.first.log) %>
+  <% else %>
+    <%= link_to 'Register', new_user_registration_path %> or
+    <%= link_to 'Sign in', new_user_session_path %>
+    <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2)%>
+    <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+  <% end %>
 
 <%= yield %>
 
+<script type="text/javascript">
+  $("#check_all").on("click", function() { 
+      $('input[type="checkbox"]').each.attr("checked", true);
+  });
+  $(".checkbox_all").on("click", function() {
+    var boxes = $('input[type="checkbox"]');
+    var allstate = document.getElementsByClassName("checkbox_all");
+    var state = allstate[0].checked;
+    var i = 0;
+    for(; i < boxes.length; i++){
+      boxes[i].checked = state;
+    }
+  });
+</script>
 </body>
 </html>

@@ -1,29 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
   <%= @movie.name %>
 </p>
 
 <p>
-  <strong>Opening day:</strong>
   <%= @movie.opening_day %>
 </p>
 
 <p>
-  <strong>Teaser:</strong>
   <%= @movie.teaser %>
 </p>
+<%= link_to @movie.user.chosen_name, @movie.user %>
 
-<p>
-  <strong>User:</strong>
-  <%= @movie.user_id %>
-</p>
-
-<p>
-  <strong>Slug:</strong>
-  <%= @movie.slug %>
-</p>
-
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+<% @ratings = @movie.ratings %>
+<% @ratings_users = @ratings.map { |r| r.user.id }%>
+<% if current_user != nil %>
+  <% if @ratings_users.include?(current_user.id) %>
+  Already reviewed this movie...
+  <% else %>
+  Review this movie:
+    <%= render partial: "movies/movie_rating", locals: { movie: @movie} %>
+  <% end %>
+<% end %>
+<div id="movie_ratings">
+  RATINGS:
+ <%= render @ratings %>
+</div>
+<div id="movie_links">
+  <%= link_to 'Edit', edit_movie_path(@movie) %> |
+  <%= link_to 'Back', movies_path %>
+</div>

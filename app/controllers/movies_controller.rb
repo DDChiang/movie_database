@@ -5,11 +5,15 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     @movies = Movie.all
+    store_location
   end
 
   # GET /movies/1
   # GET /movies/1.json
   def show
+    store_location
+    @movie = Movie.find(params[:id])
+    @new_rating = Rating.new
   end
 
   # GET /movies/new
@@ -19,14 +23,22 @@ class MoviesController < ApplicationController
 
   # GET /movies/1/edit
   def edit
+    @movie = Movie.find(params[:id])
+    @genres = Genre.all
+    
   end
 
   # POST /movies
   # POST /movies.json
   def create
     @movie = Movie.new(movie_params)
-
     respond_to do |format|
+      @genres = Genre.all
+      @genres.each do |g|
+        if (params[g.name] != nil)
+          @movie.genres << g
+        end
+      end
       if @movie.save
         format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
         format.json { render :show, status: :created, location: @movie }
@@ -42,6 +54,12 @@ class MoviesController < ApplicationController
   def update
     respond_to do |format|
       if @movie.update(movie_params)
+        @movie.genres.destroy_all
+        Genre.all.each do |g|
+          if (params[g.name] != nil)
+            @movie.genres.push(g)
+          end
+        end
         format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
         format.json { render :show, status: :ok, location: @movie }
       else
@@ -56,7 +74,7 @@ class MoviesController < ApplicationController
   def destroy
     @movie.destroy
     respond_to do |format|
-      format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed.' }
+      redirect_back_or movies_path
       format.json { head :no_content }
     end
   end

@@ -23,15 +23,22 @@
     <%= f.label :teaser %><br>
     <%= f.text_area :teaser %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :slug %><br>
-    <%= f.text_field :slug %>
+  <div class="movies_choose_genre">
+    <% @movie_genres = @movie.genres %>
+    <% @genres.each do |g| %>
+      <div class="movies_choose_genre_div">
+        <% if !!@movie_genres.detect {|m_genre| m_genre[:name] == g.name } %>
+         <%= check_box_tag g.name, g.name, :checked => true, :class => "checkbox" %>
+        <% else %>
+         <%= check_box_tag g.name, g.name, false, :class => "checkbox" %>
+        <% end %>
+        <label><%= g.name %></label>
+      </div>
+    <% end %>
+    <%= check_box_tag "all_checked", "true", false, :class => "checkbox_all" %>Check/Uncheck All<br>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

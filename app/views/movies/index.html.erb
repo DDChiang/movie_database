@@ -1,32 +1,30 @@
-<h1>Listing movies</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Opening day</th>
-      <th>Teaser</th>
-      <th>User</th>
-      <th>Slug</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td><%= movie.name %></td>
-        <td><%= movie.opening_day %></td>
-        <td><%= movie.teaser %></td>
-        <td><%= movie.user_id %></td>
-        <td><%= movie.slug %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h1>Movie Quibbler</h1>
+<%= link_to 'New Movie', new_movie_path %>
+<% i = 1 %>
+<% @movies.each do |movie| %>
+  <div id="movie">
+    <div id="movie_name">
+      <%= "#{i}. " %><%= movie.name %>
+    </div>
+    <div id="movie_opening">
+      <%= movie.opening_day %>
+    </div>
+    <div id="movie_teaser">
+      <%= movie.teaser %>
+    </div>
+    <div id="movie_genres">
+      <% movie.genres.each do |g| %>
+        <%= g.name %> 
+      <% end %>
+    </div>
+    <div id="movie_links">
+      <%= link_to 'Show', movie %>
+      <%= link_to 'Edit', edit_movie_path(movie) %>
+      <%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+  <% i += 1 %>
+<% end %>
 
 <br>
 

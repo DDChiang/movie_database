@@ -1,5 +1,7 @@
-- Take user to complete user profile (description, chosen_name) 
-- Add omniauth for FB, G+ initial signin. Then add option to add twitter/pinterest/w/e there is.
++- Take user to complete user profile (description, chosen_name) 
++- Add omniauth for FB, G+ initial signin. 
+- Then add option to add twitter/pinterest/w/e there is.
+- Friendly forwarding
 - Add email confirmation
 - Add authorization
 - Add ranking to movies

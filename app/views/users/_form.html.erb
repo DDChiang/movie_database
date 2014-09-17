@@ -1,3 +1,4 @@
+<% #user profile. to edit user email, password, and all that, go to devise#edit_user_registration  %>
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -12,14 +13,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :uid %><br>
-    <%= f.text_field :uid %>
-  </div>
-  <div class="field">
-    <%= f.label :provider %><br>
-    <%= f.text_field :provider %>
-  </div>
-  <div class="field">
     <%= f.label :chosen_name %><br>
     <%= f.text_field :chosen_name %>
   </div>
@@ -28,6 +21,7 @@
     <%= f.text_area :description %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit  %>
+    <%= link_to "Skip", root_url %>
   </div>
 <% end %>
