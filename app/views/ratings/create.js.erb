@@ -1,0 +1,8 @@
+<% @rating = Rating.where('user_id' => 4, 'movie_id' => 3).first %>
+
+
+$(function(){
+  var html = "<%= escape_javascript(render @rating) %>";
+  $("#movie_ratings").prepend(html);
+  $("#create_rating").hide();
+});

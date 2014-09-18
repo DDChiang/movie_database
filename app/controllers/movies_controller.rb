@@ -19,6 +19,7 @@ class MoviesController < ApplicationController
   # GET /movies/new
   def new
     @movie = Movie.new
+    @genres = Genre.all
   end
 
   # GET /movies/1/edit
@@ -72,6 +73,7 @@ class MoviesController < ApplicationController
   # DELETE /movies/1
   # DELETE /movies/1.json
   def destroy
+    @movie = Movie.find(params[:id])
     @movie.destroy
     respond_to do |format|
       redirect_back_or movies_path

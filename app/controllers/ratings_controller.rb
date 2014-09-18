@@ -1,5 +1,5 @@
 class RatingsController < ApplicationController
-  before_action :set_rating, only: [:show, :edit, :update, :destroy]
+  before_action :set_rating, only: [:show, :edit, :update]
   before_action :authenticate, only: [:new, :create, :edit, :update, :destroy]
   # GET /ratings
   # GET /ratings.json
@@ -28,8 +28,9 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       if @rating.save
-        format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
-        format.json { render :show, status: :created, location: @rating }
+        format.html { redirect_back_or(movies_path) }
+        format.js
+        #format.json { render :show, status: :created, location: @rating }
       else
         format.html { render :new }
         format.json { render json: @rating.errors, status: :unprocessable_entity }
@@ -54,10 +55,14 @@ class RatingsController < ApplicationController
   # DELETE /ratings/1
   # DELETE /ratings/1.json
   def destroy
-    @rating.destroy
+    @rating = Rating.where('id' => params[:id]).first
+    if @rating != nil 
+      @rating.destroy
+    end
     respond_to do |format|
-      format.html { redirect_to ratings_url, notice: 'Rating was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_back_or root_url }
+      #format.json { head :no_content }
+      format.js
     end
   end
 

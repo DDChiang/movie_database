@@ -1,10 +1,12 @@
-+- Take user to complete user profile (description, chosen_name) 
-+- Add omniauth for FB, G+ initial signin. 
+1 +- Take user to complete user profile (description, chosen_name) 
+2 +- Add omniauth for FB, G+ initial signin. 
+3 +- Friendly forwarding
+- Finish testing friendly forwarding
+- Add slug
 - Then add option to add twitter/pinterest/w/e there is.
-- Friendly forwarding
 - Add email confirmation
 - Add authorization
-- Add ranking to movies
+- Add star ranking to movies
 - Style the views
 - Caching
 - Materialized Views

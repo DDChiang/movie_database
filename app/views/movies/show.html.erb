@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<div style="border: 1px solid black;">
 <p>
   <%= @movie.name %>
 </p>
@@ -12,15 +13,21 @@
   <%= @movie.teaser %>
 </p>
 <%= link_to @movie.user.chosen_name, @movie.user %>
-
+</div>
 <% @ratings = @movie.ratings %>
 <% @ratings_users = @ratings.map { |r| r.user.id }%>
+<br>
 <% if current_user != nil %>
   <% if @ratings_users.include?(current_user.id) %>
-  Already reviewed this movie...
+    Already reviewed this movie...
+    <div style="display:none;" id="create_rating">
+      <%= render partial: "movies/movie_rating", locals: { movie: @movie} %>
+    </div>
   <% else %>
-  Review this movie:
-    <%= render partial: "movies/movie_rating", locals: { movie: @movie} %>
+    <div id="create_rating">
+      Review this movie:
+      <%= render partial: "movies/movie_rating", locals: { movie: @movie} %>
+    </div>
   <% end %>
 <% end %>
 <div id="movie_ratings">
