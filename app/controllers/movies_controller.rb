@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /movies
   # GET /movies.json
@@ -11,7 +12,6 @@ class MoviesController < ApplicationController
   # GET /movies/1
   # GET /movies/1.json
   def show
-    store_location
     @movie = Movie.find(params[:id])
     @new_rating = Rating.new
   end
@@ -77,6 +77,7 @@ class MoviesController < ApplicationController
     @movie.destroy
     respond_to do |format|
       redirect_back_or movies_path
+	#from user profile or from movies_path
       format.json { head :no_content }
     end
   end

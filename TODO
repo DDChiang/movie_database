@@ -1,8 +1,10 @@
 1 +- Take user to complete user profile (description, chosen_name) 
 2 +- Add omniauth for FB, G+ initial signin. 
 3 +- Friendly forwarding
-- Finish testing friendly forwarding
+    Finish testing friendly forwarding
+      --> Force user to sign in 
 - Add slug
+- Fix Route names
 - Then add option to add twitter/pinterest/w/e there is.
 - Add email confirmation
 - Add authorization

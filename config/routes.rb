@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :actors
 
-  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks", registrations: "registrations" }
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks", registrations: "registrations", sessions: "sessions" }
   resources :users
   root 'movies#index'
   # The priority is based upon order of creation: first created -> highest priority.

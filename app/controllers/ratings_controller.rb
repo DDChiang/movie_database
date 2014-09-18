@@ -10,6 +10,7 @@ class RatingsController < ApplicationController
   # GET /ratings/1
   # GET /ratings/1.json
   def show
+    @rating = Rating.find(params[:id])
   end
 
   # GET /ratings/new
@@ -19,6 +20,7 @@ class RatingsController < ApplicationController
 
   # GET /ratings/1/edit
   def edit
+    @rating = Rating.find(params[:id])
   end
 
   # POST /ratings
@@ -67,9 +69,6 @@ class RatingsController < ApplicationController
   end
 
   private
-    def authenticate
-      deny_access unless user_signed_in?
-    end
     # Use callbacks to share common setup or constraints between actions.
     def set_rating
       @rating = Rating.find(params[:id])

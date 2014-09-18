@@ -1,5 +1,6 @@
 class SpoilersController < ApplicationController
   before_action :set_spoiler, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /spoilers
   # GET /spoilers.json

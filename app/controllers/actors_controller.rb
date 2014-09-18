@@ -1,9 +1,10 @@
 class ActorsController < ApplicationController
   before_action :set_actor, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate, only: [:new, :edit, :create, :update, :destroy]
   # GET /actors
   # GET /actors.json
   def index
+    store_location
     @actors = Actor.all
   end
 
