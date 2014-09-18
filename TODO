@@ -3,11 +3,24 @@
 3 +- Friendly forwarding
     Finish testing friendly forwarding
       --> Force user to sign in 
-- Add slug
+4 +- Add slug
+- Validations
+	- genres: unique names
+	- directors/actors unique combo name/birthday
+ 	- movies unique name/year/director if available info
+	- spoiler unique user/movie
+	- rating unique user/movie
+	
+- Ratings#new page
+- Complete Glogs
 - Fix Route names
 - Then add option to add twitter/pinterest/w/e there is.
+   - Add tweet to glogs
 - Add email confirmation
 - Add authorization
+    -admin
+    -current_user == user
+    - remove links not pertinent to current authority.
 - Add star ranking to movies
 - Style the views
 - Caching

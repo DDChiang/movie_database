@@ -14,7 +14,7 @@
 
   <div class="field">
     <%= f.label :chosen_name %><br>
-    <%= f.text_field :chosen_name %>
+    <%= f.text_field :chosen_name, :value => @user.username %>
   </div>
   <div class="field">
     <%= f.label :description %><br>

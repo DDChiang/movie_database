@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   respond_to :html, :json
+
   def create
     build_resource(sign_up_params)
     resource_saved = resource.save

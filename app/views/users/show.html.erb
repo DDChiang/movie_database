@@ -10,5 +10,8 @@
   <%= @user.description %>
 </p>
 
+<div id="movie_ratings">
+ <%= render @user.ratings %>
+</div>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Other users', users_path %>

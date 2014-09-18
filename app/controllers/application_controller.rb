@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   #[1]should forward back to page when destroying something
   #[2]should forward back when press back button
+  def store_location2
+    session[:return_to2] = request.fullpath
+  end
+  def clear_return_to2
+    session[:return_to2] = nil
+  end
   def store_location 
     session[:return_to] = request.fullpath
   end

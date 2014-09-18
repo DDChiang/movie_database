@@ -1,17 +1,17 @@
 <%= form_for(movie.ratings.build, remote: true) do |f| %>
   <%= f.hidden_field :movie_id, value: movie.id %>
   <%= f.hidden_field :user_id, value: current_user.id %>
-  <div id="movie_review_label">
-  <%= f.label "Review" %>
-  </div>
-  <div id="movie_review">
-  <%= f.text_area :review %> 
-  </div>
   <div id="movie_rating_label">
   <%= f.label "Rating"%>
   </div>
   <div id="movie_rating_stars">
   <%= f.text_field :stars, value: 0 %>
+  </div>
+  <div id="movie_review_label">
+  <%= f.label "Review" %>
+  </div>
+  <div id="movie_review">
+  <%= f.text_area :review %> 
   </div>
   <%= f.submit %>
 <% end %>

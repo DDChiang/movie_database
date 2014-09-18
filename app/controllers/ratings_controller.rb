@@ -10,6 +10,7 @@ class RatingsController < ApplicationController
   # GET /ratings/1
   # GET /ratings/1.json
   def show
+    session[:root_visited] = "R"
     @rating = Rating.find(params[:id])
   end
 
@@ -58,11 +59,18 @@ class RatingsController < ApplicationController
   # DELETE /ratings/1.json
   def destroy
     @rating = Rating.where('id' => params[:id]).first
+    @movie = Movie.find(@rating.movie_id)
+    @user = User.find(@rating.user_id)
     if @rating != nil 
       @rating.destroy
     end
     respond_to do |format|
-      format.html { redirect_back_or root_url }
+      format.html { if session[:root_visited] == 'U'
+			redirect_to @user
+                    else
+			redirect_to @movie
+		    end
+		  }
       #format.json { head :no_content }
       format.js
     end
@@ -76,6 +84,6 @@ class RatingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rating_params
-      params.require(:rating).permit(:user_id, :movie_id, :review, :value, :review_present)
+      params.require(:rating).permit(:user_id, :movie_id, :review, :stars, :review_present)
     end
 end

@@ -6,11 +6,12 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-
+    ruby 2.1.2
 * System dependencies
-
+    uses Postgresql. 
+    user: postgresql
 * Configuration
-
+    set GOOGLE_ID, GOOGLE_SECRET, FACEBOOK_ID, FACEBOOK_SECRET in your environment
 * Database creation
 
 * Database initialization

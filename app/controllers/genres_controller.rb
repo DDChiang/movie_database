@@ -10,6 +10,7 @@ class GenresController < ApplicationController
   # GET /genres/1
   # GET /genres/1.json
   def show
+    @genre = Genre.find_by_slug(params[:id])
   end
 
   # GET /genres/new
@@ -19,6 +20,7 @@ class GenresController < ApplicationController
 
   # GET /genres/1/edit
   def edit
+    @genre = Genre.find_by_slug(params[:id])
   end
 
   # POST /genres
@@ -40,6 +42,7 @@ class GenresController < ApplicationController
   # PATCH/PUT /genres/1
   # PATCH/PUT /genres/1.json
   def update
+    @genre = Genre.find_by_slug(params[:id])
     respond_to do |format|
       if @genre.update(genre_params)
         format.html { redirect_to @genre, notice: 'Genre was successfully updated.' }
@@ -54,6 +57,7 @@ class GenresController < ApplicationController
   # DELETE /genres/1
   # DELETE /genres/1.json
   def destroy
+    @genre = Genre.find_by_slug(params[:id])
     @genre.destroy
     respond_to do |format|
       format.html { redirect_to genres_url, notice: 'Genre was successfully destroyed.' }
@@ -64,7 +68,8 @@ class GenresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_genre
-      @genre = Genre.find(params[:id])
+      @genre = Genre.find_by_slug(params[:id])
+      #@genre = Genre.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
