@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<% if @actor.stage_name %>
+  Also known as <%= @actor.stage_name %>
+<% end %>
 <p>
   <strong>First:</strong>
   <%= @actor.first %>
@@ -8,16 +10,6 @@
 <p>
   <strong>Last:</strong>
   <%= @actor.last %>
-</p>
-
-<p>
-  <strong>Slug:</strong>
-  <%= @actor.slug %>
-</p>
-
-<p>
-  <strong>Approved:</strong>
-  <%= @actor.approved %>
 </p>
 
 <p>

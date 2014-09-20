@@ -2,17 +2,24 @@
 2 +- Add omniauth for FB, G+ initial signin. 
 3 +- Friendly forwarding
     Finish testing friendly forwarding
-      --> Force user to sign in 
+      +--> Force user to sign in 
 4 +- Add slug
-- Validations
-	- genres: unique names
-	- directors/actors unique combo name/birthday
- 	- movies unique name/year/director if available info
-	- spoiler unique user/movie
-	- rating unique user/movie
-	
+5 +- Removed movies_genres bc already have genres_movies
+6 +- Index/Validations
+	+- genres: unique names
+	+- directors/actors unique combo name/birthday/stage_name
+        
+	+- rating unique user/movie
+7 +- spoiler unique user/movie. 
+   - with version control from vestral
+
+- If possible duplicate records found, show
+- Have users first encounter search for actors/directors/movies. If not found, can add.
+        - Search functionality
+- Put movies/actors/directors to approval process	
 - Ratings#new page
 - Complete Glogs
+  - Add index.
 - Fix Route names
 - Then add option to add twitter/pinterest/w/e there is.
    - Add tweet to glogs
@@ -25,6 +32,7 @@
 - Style the views
 - Caching
 - Materialized Views
+ 	- movies unique name/year/director if available info
 - Twitter Feed
 
 

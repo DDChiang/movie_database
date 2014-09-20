@@ -10,7 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= f.label "Nickname/Stage name" %><br>
+    <%= f.text_field :stage_name %>
+  </div>
   <div class="field">
     <%= f.label :first %><br>
     <%= f.text_field :first %>
@@ -18,10 +21,6 @@
   <div class="field">
     <%= f.label :last %><br>
     <%= f.text_field :last %>
-  </div>
-  <div class="field">
-    <%= f.label :slug %><br>
-    <%= f.text_field :slug %>
   </div>
   <div class="field">
     <%= f.label :approved %><br>

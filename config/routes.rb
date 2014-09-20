@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :roles
 
-  resources :ratings
+  resources :ratings, only: [:show, :index, :edit, :create, :update, :destroy]
 
   resources :spoilers
 

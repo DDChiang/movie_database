@@ -27,7 +27,6 @@ class MoviesController < ApplicationController
   def edit
     @movie = Movie.find(params[:id])
     @genres = Genre.all
-    
   end
 
   # POST /movies
@@ -54,10 +53,11 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   # PATCH/PUT /movies/1.json
   def update
+    @genres = Genre.all
     respond_to do |format|
       if @movie.update(movie_params)
         @movie.genres.destroy_all
-        Genre.all.each do |g|
+        @genres.each do |g|
           if (params[g.name] != nil)
             @movie.genres.push(g)
           end
@@ -77,7 +77,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     @movie.destroy
     respond_to do |format|
-      redirect_back_or movies_path
+      format.html { redirect_back_or movies_path }
 	#from user profile or from movies_path
       format.json { head :no_content }
     end
@@ -86,7 +86,11 @@ class MoviesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
-      @movie = Movie.find(params[:id])
+      begin
+	@movie = Movie.find(params[:id])
+      rescue
+        redirect_to movies_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

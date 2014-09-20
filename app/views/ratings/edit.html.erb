@@ -1,5 +1,5 @@
 <h1>Editing rating</h1>
-
+<%= link_to "Remove Your Movie Review", @rating, method: "DELETE", action: "destroy", data: { confirm: "Are you sure?" } %>
 <%= render 'form' %>
 
 <%= link_to 'Show', @rating %> |

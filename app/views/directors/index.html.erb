@@ -3,9 +3,9 @@
 <table>
   <thead>
     <tr>
+      <th>Nickname/Stage Name</th>
       <th>First</th>
       <th>Last</th>
-      <th>Slug</th>
       <th>Approved</th>
       <th>Birthday</th>
       <th colspan="3"></th>
@@ -15,9 +15,9 @@
   <tbody>
     <% @directors.each do |director| %>
       <tr>
+        <td><%= director.stage_name %></td>
         <td><%= director.first %></td>
         <td><%= director.last %></td>
-        <td><%= director.slug %></td>
         <td><%= director.approved %></td>
         <td><%= director.birthday %></td>
         <td><%= link_to 'Show', director %></td>

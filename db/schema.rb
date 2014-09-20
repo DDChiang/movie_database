@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140918010820) do
+ActiveRecord::Schema.define(version: 20140920003850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,22 +19,31 @@ ActiveRecord::Schema.define(version: 20140918010820) do
   create_table "actors", force: true do |t|
     t.string   "first"
     t.string   "last"
-    t.string   "slug"
     t.boolean  "approved",   default: false
     t.date     "birthday"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "stage_name"
   end
+
+  add_index "actors", ["first", "last"], name: "index_actors_on_first_and_last", using: :btree
+  add_index "actors", ["first"], name: "index_actors_on_first", using: :btree
+  add_index "actors", ["last"], name: "index_actors_on_last", using: :btree
 
   create_table "directors", force: true do |t|
     t.string   "first"
     t.string   "last"
-    t.string   "slug"
     t.boolean  "approved",   default: false
     t.date     "birthday"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "stage_name"
   end
+
+  add_index "directors", ["first", "last", "birthday"], name: "index_directors_on_first_and_last_and_birthday", unique: true, using: :btree
+  add_index "directors", ["first", "last"], name: "index_directors_on_first_and_last", using: :btree
+  add_index "directors", ["first"], name: "index_directors_on_first", using: :btree
+  add_index "directors", ["last"], name: "index_directors_on_last", using: :btree
 
   create_table "directors_movies", force: true do |t|
     t.integer  "movie_id"
@@ -43,6 +52,10 @@ ActiveRecord::Schema.define(version: 20140918010820) do
     t.datetime "updated_at"
   end
 
+  add_index "directors_movies", ["director_id"], name: "index_directors_movies_on_director_id", using: :btree
+  add_index "directors_movies", ["movie_id", "director_id"], name: "index_directors_movies_on_movie_id_and_director_id", unique: true, using: :btree
+  add_index "directors_movies", ["movie_id"], name: "index_directors_movies_on_movie_id", using: :btree
+
   create_table "genres", force: true do |t|
     t.string   "name"
     t.string   "slug"
@@ -50,12 +63,19 @@ ActiveRecord::Schema.define(version: 20140918010820) do
     t.datetime "updated_at"
   end
 
+  add_index "genres", ["name"], name: "index_genres_on_name", using: :btree
+  add_index "genres", ["slug"], name: "index_genres_on_slug", using: :btree
+
   create_table "genres_movies", force: true do |t|
     t.integer  "movie_id"
     t.integer  "genre_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "genres_movies", ["genre_id", "movie_id"], name: "index_genres_movies_on_genre_id_and_movie_id", unique: true, using: :btree
+  add_index "genres_movies", ["genre_id"], name: "index_genres_movies_on_genre_id", using: :btree
+  add_index "genres_movies", ["movie_id"], name: "index_genres_movies_on_movie_id", using: :btree
 
   create_table "glogs", force: true do |t|
     t.text     "log"
@@ -71,14 +91,12 @@ ActiveRecord::Schema.define(version: 20140918010820) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "spoiler_id"
   end
 
-  create_table "movies_genres", id: false, force: true do |t|
-    t.integer  "movie_id"
-    t.integer  "genre_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "movies", ["name"], name: "index_movies_on_name", using: :btree
+  add_index "movies", ["opening_day"], name: "index_movies_on_opening_day", using: :btree
+  add_index "movies", ["user_id"], name: "index_movies_on_user_id", using: :btree
 
   create_table "ratings", force: true do |t|
     t.integer  "user_id"
@@ -90,6 +108,11 @@ ActiveRecord::Schema.define(version: 20140918010820) do
     t.datetime "updated_at"
   end
 
+  add_index "ratings", ["movie_id"], name: "index_ratings_on_movie_id", using: :btree
+  add_index "ratings", ["stars"], name: "index_ratings_on_stars", using: :btree
+  add_index "ratings", ["user_id", "movie_id"], name: "index_ratings_on_user_id_and_movie_id", unique: true, using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
+
   create_table "roles", force: true do |t|
     t.integer  "actor_id"
     t.integer  "movie_id"
@@ -99,6 +122,12 @@ ActiveRecord::Schema.define(version: 20140918010820) do
     t.datetime "updated_at"
   end
 
+  add_index "roles", ["actor_id", "movie_id", "name"], name: "index_roles_on_actor_id_and_movie_id_and_name", unique: true, using: :btree
+  add_index "roles", ["actor_id", "movie_id"], name: "index_roles_on_actor_id_and_movie_id", using: :btree
+  add_index "roles", ["actor_id"], name: "index_roles_on_actor_id", using: :btree
+  add_index "roles", ["movie_id"], name: "index_roles_on_movie_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
   create_table "spoilers", force: true do |t|
     t.integer  "movie_id"
     t.integer  "user_id"
@@ -106,6 +135,9 @@ ActiveRecord::Schema.define(version: 20140918010820) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "spoilers", ["movie_id"], name: "index_spoilers_on_movie_id", using: :btree
+  add_index "spoilers", ["user_id"], name: "index_spoilers_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "uid"
