@@ -20,7 +20,7 @@
     <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
   <% end %>
   <% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>"><%= value %></div>
+    <div class="alert alert-<%= key %>"><%= raw value %></div>
   <% end %>
 
 <%= yield %>

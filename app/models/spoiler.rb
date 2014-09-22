@@ -2,6 +2,7 @@ class Spoiler < ActiveRecord::Base
   belongs_to :movie
   belongs_to :user
   validate :unique_user_movie
+  has_paper_trail
   def unique_user_movie
     others = Spoiler.where('movie_id' => movie_id).select { |s| s.id != id}
     if others.count > 0

@@ -1,19 +1,24 @@
 1 +- Take user to complete user profile (description, chosen_name) 
 2 +- Add omniauth for FB, G+ initial signin. 
 3 +- Friendly forwarding
-    Finish testing friendly forwarding
-      +--> Force user to sign in 
+	+- friendly forwarding after deleting an activerecord will now 
+	+- depend on a session[:root_visited] param that is set when 
+	+- visited a show page for movies, users, or rating
+    Finish testing friendly forwarding 
+      +--> Force user to sign in order to create/edit/update/destroy 
 4 +- Add slug
 5 +- Removed movies_genres bc already have genres_movies
 6 +- Index/Validations
 	+- genres: unique names
 	+- directors/actors unique combo name/birthday/stage_name
-        
+         +- doesn't use unique index bc will get pg:error method when not pass
+	 +- instead, calls custom validation. 
 	+- rating unique user/movie
 7 +- spoiler unique user/movie. 
-   - with version control from vestral
+   +- with version control from vestal
+   - List users who have edited.
 
-- If possible duplicate records found, show
+- If possible duplicate records found, show. provide suggestions and links.
 - Have users first encounter search for actors/directors/movies. If not found, can add.
         - Search functionality
 - Put movies/actors/directors to approval process	
