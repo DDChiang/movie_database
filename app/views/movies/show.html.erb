@@ -12,7 +12,15 @@
 <p>
   <%= @movie.teaser %>
 </p>
-<%= link_to @movie.user.chosen_name, @movie.user %>
+Posted by <%= link_to @movie.user.chosen_name, @movie.user %>
+</div>
+<div id="movie_synopsis">
+  <% if @movie.spoiler == nil %>
+    <%= link_to "Create a new spoiler", new_spoiler_path %> 
+  <% else %>
+    <%= link_to "Synopsis", @movie.spoiler %>:<br>
+    <%= @movie.spoiler.synopsis %>
+  <% end %>
 </div>
 <% @ratings = @movie.ratings %>
 <% @ratings_users = @ratings.map { |r| r.user.id }%>

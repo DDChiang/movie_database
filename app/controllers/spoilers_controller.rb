@@ -18,22 +18,38 @@ class SpoilersController < ApplicationController
   # GET /spoilers/1
   # GET /spoilers/1.json
   def show
+    @spoiler = Spoiler.find(params[:id])
+    @movie = Movie.find(@spoiler.movie_id)
   end
 
   # GET /spoilers/new
   def new
     @spoiler = Spoiler.new
+    @movie = Movie.find(session[:movie_id])
   end
 
   # GET /spoilers/1/edit
   def edit
+    @spoiler = Spoiler.find(params[:id])
+    @movie = Movie.find(@spoiler.movie_id) 
+    @version = @spoiler.versions.last 
+    @action = @version.event
+    if @version.event == "destroy"
+      @action = "last destroyed by " 
+    else
+      @action = "last #{@action}ed by "
+    end
+    @last_user = User.find(@version.whodunnit.to_i)
+    @who = @spoiler.versions.map {|v| v.whodunnit}
+    @who_count = @who.each_with_object(Hash.new(0)) {|id, counts| counts[id] += 1}
+    @who_ordered = @who_count.sort_by { |k, v| v}.reverse #in descending. Top contrib comes first
+    @who_users = @who_count.map { |k, v| User.find(k)}
   end
 
   # POST /spoilers
   # POST /spoilers.json
   def create
     @spoiler = Spoiler.new(spoiler_params)
-
     respond_to do |format|
       if @spoiler.save
         format.html { redirect_to @spoiler, notice: "Spoiler was successfully created. #{undo_link}" }

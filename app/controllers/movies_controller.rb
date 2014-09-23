@@ -13,7 +13,8 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def show
     session[:root_visited] = "M"
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find(params[:id])  
+    session[:movie_id] = params[:id]
     @new_rating = Rating.new
   end
 

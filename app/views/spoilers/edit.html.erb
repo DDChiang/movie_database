@@ -1,6 +1,35 @@
-<h1>Editing spoiler</h1>
+<h1>Edit Synopsis for <%= link_to @movie.name, @movie %></h1>
 
-<%= render 'form' %>
-
+<div id="synopsis_versions">
+  <div id="synopsis_edit_form">
+    <%= render 'form' %>
+  </div>
+  <% if @version.event == "destroy" %>
+    deleted by
+  <% else %>
+    last <%= @version.event %>d by <%= link_to @last_user.chosen_name, @last_user %>
+  <% end %>
+  <hr>
+  <% @versions = @spoiler.versions.reverse %>
+  <% @versions.each do |v| %>
+    <% if v[:object] != nil %>
+      <div id="synopsis_version_<%= v.id %>">
+         <%= v[:object].split(/\n[a-zA-Z]+\:/).last.split(/\n/).first %>
+      </div>
+      <% if v.event == "destroy" %>
+        deleted
+      <% else %>
+        <%= v.event %>d 
+      <% end %>by <%= link_to User.find(v.whodunnit).chosen_name, @last_user %>
+      <hr>
+    <% end %>
+  <% end %>
+</div>
+Top Contributers: 
+<div id="who_users">
+  <% @who_users[0..5].each do |u| %>
+    <%= link_to u.chosen_name, u %>
+  <% end %>
+</div>
 <%= link_to 'Show', @spoiler %> |
 <%= link_to 'Back', spoilers_path %>

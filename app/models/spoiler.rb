@@ -10,7 +10,7 @@ class Spoiler < ActiveRecord::Base
     end
   end
   def slug
-    @string = movie.name + " spoiler written by " #+ user.chosen_name
+    @string = movie.name + " synopsis"
     @string.downcase.gsub(" ","-")
   end
   
