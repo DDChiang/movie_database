@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'paper_trail', '~> 3.0.5'
-
+gem 'rails_12factor'
 gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
 
