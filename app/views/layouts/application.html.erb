@@ -13,7 +13,6 @@
     <%= link_to 'Sign out', destroy_user_session_path,:method => :delete %>
     <%= link_to "Settings", edit_user_registration_path %>
     <%= link_to "Profile", user_path(current_user) %>
-    <%= raw(Glogs.first.log) %>
   <% else %>
     <%= link_to 'Register', new_user_registration_path %> or
     <%= link_to 'Sign in', new_user_session_path %>
