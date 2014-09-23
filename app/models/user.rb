@@ -6,6 +6,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   has_many :movies #authored posts
   has_many :ratings  
+  def chosen_name_unique
+    if chosen_name != nil
+       if (User.where('chosen_name' => chosen_name).count > 2)
+         errors.add(:chosen_name, "Please choose a different user name")
+       end
+    end
+  end
 
   def self.from_omniauth(auth)
     if user = User.find_by_email(auth.info.email)
