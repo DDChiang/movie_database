@@ -17,6 +17,10 @@
 7 +- spoiler unique user/movie. 
    +- with version control from vestal
    - List users who have edited.
+- Add authorization
+    -admin
+    -current_user == user
+    - remove links not pertinent to current authority.
 
 -Remember! Style the version control
 - If possible duplicate records found, show. provide suggestions and links.
@@ -30,10 +34,6 @@
 - Then add option to add twitter/pinterest/w/e there is.
    - Add tweet to glogs
 - Add email confirmation
-- Add authorization
-    -admin
-    -current_user == user
-    - remove links not pertinent to current authority.
 - Add star ranking to movies
 - Style the views
 - Caching
