@@ -35,7 +35,9 @@
   <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"><%= raw value %></div>
   <% end %>
-<%= yield %>
+<div id="main_content">
+  <%= yield %>
+</div>
 
 <script type="text/javascript">
   $("#check_all").on("click", function() { 
