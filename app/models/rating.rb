@@ -18,4 +18,7 @@ class Rating < ActiveRecord::Base
     "#{id}-#{slug}"
   end
 
+  def is_admin_or_same_user(user)
+    user.id == user_id
+  end
 end

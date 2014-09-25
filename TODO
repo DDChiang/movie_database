@@ -16,7 +16,7 @@
 	+- rating unique user/movie
 7 +- spoiler unique user/movie. 
    +- with version control from vestal
-   - List users who have edited.
+   +- List users who have edited.
 - Add authorization
     -admin
     -current_user == user
@@ -41,4 +41,4 @@
  	- movies unique name/year/director if available info
 - Twitter Feed
 
-
+- Trim versions table to not save anything older than a week.

@@ -28,5 +28,18 @@ class ApplicationController < ActionController::Base
   def authenticate
     deny_access unless user_signed_in?
   end
-
+  def admin_user
+    if user_signed_in?
+      user.admin
+    else 
+      false
+    end
+  end
+  def admin_user_or_same_user(user)
+    if user_signed_in?
+      user == current_user
+    else
+      false
+    end
+  end
 end

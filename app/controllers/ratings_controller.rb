@@ -1,6 +1,8 @@
 class RatingsController < ApplicationController
   before_action :set_rating, only: [:show, :edit, :update]
   before_action :authenticate, only: [:new, :create, :edit, :update, :destroy]
+  before_action :admin_user_or_same_user, only: [:edit, :update, :destroy ]
+
   # GET /ratings
   # GET /ratings.json
   def index
@@ -77,6 +79,10 @@ class RatingsController < ApplicationController
   end
 
   private
+    def is_admin_or_same_user
+        current_user == @rating.user
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_rating
       @rating = Rating.find(params[:id])
