@@ -17,8 +17,8 @@
 7 +- spoiler unique user/movie. 
    +- with version control from vestal
    +- List users who have edited.
-- Add authorization
-    -admin
++- Add authorization
+    +-admin
     -current_user == user
     - remove links not pertinent to current authority.
 
