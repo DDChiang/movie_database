@@ -21,6 +21,8 @@
       <% else %>
         <%= v.event %>d 
       <% end %>by <%= link_to User.find(v.whodunnit).chosen_name, @last_user %>
+     <%= link_to "revert to this version", revert_version_path(v.id), :method => :post %>
+
       <hr>
     <% end %>
   <% end %>

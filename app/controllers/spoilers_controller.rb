@@ -93,13 +93,14 @@ class SpoilersController < ApplicationController
   def undo_link
     view_context.link_to("undo", revert_version_path(@spoiler.versions.last), :method => :post)
   end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_spoiler
-      @spoiler = Spoiler.find(actual_id)
-    end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_spoiler
+    @spoiler = Spoiler.find(actual_id)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def spoiler_params
-      params.require(:spoiler).permit(:movie_id, :user_id, :synopsis)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def spoiler_params
+    params.require(:spoiler).permit(:movie_id, :user_id, :synopsis)
+  end
 end
