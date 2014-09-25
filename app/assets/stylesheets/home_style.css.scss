@@ -11,18 +11,20 @@
 .header_box {
   width: 100%;
   text-align: center;
+  padding-bottom: .5em;
 }
 
 #header_logo {
   font-family: 'Times New Roman'
 }
 
-
 .header_nav_list {
   width:96%;
   margin-left: 2%;
-  height:2em;
-  
+  height: 2em;
+  border-top: black .2em solid;
+  border-bottom: #808080 .1em solid;
+  margin-bottom: 1em;
 }
 
 #nav_li {
