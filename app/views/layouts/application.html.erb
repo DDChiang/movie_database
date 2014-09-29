@@ -27,10 +27,10 @@
   <div id="mono_time"><%= Time.now.strftime("%A, %B %e, %Y") %></div>
 </div>
 <div class="header_nav_list">
-  <div id="nav_li">Nav Li #1</div>
-  <div id="nav_li">Nav Li #1</div>
-  <div id="nav_li">Nav Li #1</div>
-  <div id="nav_li">Nav Li #1</div>
+  <div id="nav_li"><%= link_to "HOME", root_url%></div>
+  <div id="nav_li"><%= link_to "MOVIES", movies_path %></div>
+  <div id="nav_li">BOOKS</div>
+  <div id="nav_li">LISTED</div>
 </div>
   <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"><%= raw value %></div>
