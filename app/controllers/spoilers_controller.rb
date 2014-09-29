@@ -1,6 +1,6 @@
 class SpoilersController < ApplicationController
-  before_action :set_spoiler, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate, only: [:new, :edit, :create, :update, :destroy]
+  before_action :set_spoiler, only: [:show, :edit, :update]
+  before_action :authenticate, only: [:new, :edit, :create, :update]
   # GET /spoilers
   # GET /spoilers.json
   def actual_id
@@ -80,14 +80,14 @@ class SpoilersController < ApplicationController
 
   # DELETE /spoilers/1
   # DELETE /spoilers/1.json
-  def destroy
-    @spoiler = Spoiler.find(actual_id)
-    @spoiler.destroy
-    respond_to do |format|
-      format.html { redirect_to spoilers_url, notice: "Spoiler was successfully destroyed. #{undo_link}" }
-      format.json { head :no_content }
-    end
-  end
+#  def destroy
+#    @spoiler = Spoiler.find(actual_id)
+#   @spoiler.destroy
+#    respond_to do |format|
+#      format.html { redirect_to spoilers_url, notice: "Spoiler was successfully destroyed. #{undo_link}" }
+#      format.json { head :no_content }
+#    end
+#  end
 
   private
   def undo_link

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :ratings, only: [:show, :index, :edit, :create, :update, :destroy]
 
   post "versions/:id/revert" => "versions#revert", :as => "revert_version"
-  resources :spoilers, only: [:index, :edit, :show, :create, :update, :destroy, :new]
+  resources :spoilers, only: [:index, :edit, :show, :create, :update, :new]
 
   resources :genres
 
