@@ -1,0 +1,23 @@
+<div id="movies_list">
+  <h2>Recent Movies</h2>
+  <% @movies.each do |movie| %>
+    <div id="movie_box">
+      <div id="movie_box_name">
+        <%= link_to movie.name, movie, class: "movie_box_name_link" %>
+      </div>
+      <div id="movie_box_opening">
+        <%= movie.opening_day %>
+      </div>
+      <div id="movie_box_teaser">
+        <%= movie.teaser %>
+      </div>
+      <div id="movie_links">
+        <%= link_to 'See More', movie %>
+        <% if user_signed_in? %>
+          <%= link_to 'Edit', edit_movie_path(movie) %>
+        <% end %>
+        <%= link_to 'Flag', movie, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+  <% end %> 
+</div>

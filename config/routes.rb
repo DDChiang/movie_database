@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'static_pages/front'
+
   resources :roles
 
   resources :ratings, only: [:show, :index, :edit, :create, :update, :destroy]
@@ -16,7 +18,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks", registrations: "registrations", sessions: "sessions" }
   resources :users
-  root 'movies#index'
+  root 'static_pages#front'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

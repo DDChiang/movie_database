@@ -1,9 +1,11 @@
-<%= link_to 'New Movie', new_movie_path %>
+<% if user_signed_in? %>
+  <%= link_to 'Add movie to the listing', new_movie_path %>
+<% end %>
 <% i = 1 %>
 <% @movies.each do |movie| %>
   <div id="movie">
     <div id="movie_name">
-      <%= "#{i}. " %><%= movie.name %>
+      <%= movie.name %>
     </div>
     <div id="movie_opening">
       <%= movie.opening_day %>
@@ -29,5 +31,9 @@
 
 <br>
 <% if i > 2 %>
-  <%= link_to 'New Movie', new_movie_path %>
+  <% if user_signed_in? %>
+    <%= link_to 'Be the first to add a movie', new_movie_path %>
+  <% else %>
+    <%= link_to "Sign in", new_user_session_path %> or <%= link_to "Sign up", new_user_registration_path %> to add your movie review.
+  <% end %>
 <% end %>
