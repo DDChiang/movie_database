@@ -19,14 +19,12 @@
     <% else %>
       <%= link_to "Synopsis", @movie.spoiler %>:<br><br>
       <%= @movie.spoiler.synopsis %>
+      <div id="movie_synopsis_edit_link">
+        <% if user_signed_in? %>
+          <%= link_to "Edit synopsis", edit_spoiler_path(@movie.spoiler) %>
+        <% end %>
+      </div>
     <% end %>
-    <br>
-    <br>
-    <div id="movie_synopsis_edit_link">
-      <% if user_signed_in? %>
-        <%= link_to "Edit synopsis", edit_spoiler_path(@movie.spoiler) %>
-      <% end %>
-    </div>
   </div>
   <% @ratings = @movie.ratings %>
   <% @ratings_users = @ratings.map { |r| r.user.id }%>
