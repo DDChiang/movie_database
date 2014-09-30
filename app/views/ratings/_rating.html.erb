@@ -7,8 +7,7 @@
     <%= simple_format h rating.review %>
   </div>
   <div id="rating_info">
-    <% @user = User.find(rating.user_id) %>
-    <%= rating.created_at %>, <%= link_to "#{@user.chosen_name}", @user %> 
+    <%= rating.created_at %>, by <%= link_to rating.user.try(:chosen_name), rating.user %> 
   </div>
   <% if current_user.try(:admin?) || current_user.try(:id) == rating.user_id %>
     <%= link_to "edit", edit_rating_path(rating) %>
