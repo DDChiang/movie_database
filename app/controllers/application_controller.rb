@@ -35,11 +35,4 @@ class ApplicationController < ActionController::Base
       false
     end
   end
-  def admin_user_or_same_user(user)
-    if user_signed_in?
-      user == current_user
-    else
-      false
-    end
-  end
 end

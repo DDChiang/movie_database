@@ -20,48 +20,63 @@ class GenresController < ApplicationController
 
   # GET /genres/1/edit
   def edit
-    @genre = Genre.find_by_slug(params[:id])
+    if current_user.try(:admin?)
+      @genre = Genre.find_by_slug(params[:id])
+    else
+      redirect_to genres_path
+    end
   end
 
   # POST /genres
   # POST /genres.json
   def create
-    @genre = Genre.new(genre_params)
-
-    respond_to do |format|
-      if @genre.save
-        format.html { redirect_to @genre, notice: 'Genre was successfully created.' }
-        format.json { render :show, status: :created, location: @genre }
-      else
-        format.html { render :new }
-        format.json { render json: @genre.errors, status: :unprocessable_entity }
+    if current_user.try(:admin?)
+      @genre = Genre.new(genre_params)
+      respond_to do |format|
+        if @genre.save
+          format.html { redirect_to @genre, notice: 'Genre was successfully created.' }
+          format.json { render :show, status: :created, location: @genre }
+        else
+          format.html { render :new }
+          format.json { render json: @genre.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to genres_path
     end
   end
 
   # PATCH/PUT /genres/1
   # PATCH/PUT /genres/1.json
   def update
-    @genre = Genre.find_by_slug(params[:id])
-    respond_to do |format|
-      if @genre.update(genre_params)
-        format.html { redirect_to @genre, notice: 'Genre was successfully updated.' }
-        format.json { render :show, status: :ok, location: @genre }
-      else
-        format.html { render :edit }
-        format.json { render json: @genre.errors, status: :unprocessable_entity }
+    if current_user.try(:admin?)
+      @genre = Genre.find_by_slug(params[:id])
+      respond_to do |format|
+        if @genre.update(genre_params)
+          format.html { redirect_to @genre, notice: 'Genre was successfully updated.' }
+          format.json { render :show, status: :ok, location: @genre }
+        else
+          format.html { render :edit }
+          format.json { render json: @genre.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to genres_path
     end
   end
 
   # DELETE /genres/1
   # DELETE /genres/1.json
   def destroy
-    @genre = Genre.find_by_slug(params[:id])
-    @genre.destroy
-    respond_to do |format|
-      format.html { redirect_to genres_url, notice: 'Genre was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_user.try(:admin?)
+      @genre = Genre.find_by_slug(params[:id])
+      @genre.destroy
+      respond_to do |format|
+        format.html { redirect_to genres_url, notice: 'Genre was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to genres_path
     end
   end
 

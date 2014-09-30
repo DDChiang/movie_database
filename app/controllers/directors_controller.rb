@@ -11,54 +11,75 @@ class DirectorsController < ApplicationController
   # GET /directors/1
   # GET /directors/1.json
   def show
+    @director = Director.find(params[:id])
   end
 
   # GET /directors/new
   def new
-    @director = Director.new
+    if user_signed_in?
+      @director = Director.new
+    else
+      redirect_to directors_path
+    end
   end
 
   # GET /directors/1/edit
   def edit
+    if user_signed_in?
+      @director = Director.find(params[:id])
+    else
+      redirect_to directors_path
+    end
   end
 
   # POST /directors
   # POST /directors.json
   def create
-    @director = Director.new(director_params)
-
-    respond_to do |format|
-      if @director.save
-        format.html { redirect_to @director, notice: 'Director was successfully created.' }
-        format.json { render :show, status: :created, location: @director }
-      else
-        format.html { render :new }
-        format.json { render json: @director.errors, status: :unprocessable_entity }
+    if user_signed_in?
+      @director = Director.new(director_params)
+      respond_to do |format|
+        if @director.save
+          format.html { redirect_to @director, notice: 'Director was successfully created.' }
+          format.json { render :show, status: :created, location: @director }
+        else
+          format.html { render :new }
+          format.json { render json: @director.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to directors_path
     end
   end
 
   # PATCH/PUT /directors/1
   # PATCH/PUT /directors/1.json
   def update
-    respond_to do |format|
-      if @director.update(director_params)
-        format.html { redirect_to @director, notice: 'Director was successfully updated.' }
-        format.json { render :show, status: :ok, location: @director }
-      else
-        format.html { render :edit }
-        format.json { render json: @director.errors, status: :unprocessable_entity }
+    if user_signed_in?
+      respond_to do |format|
+        if @director.update(director_params)
+          format.html { redirect_to @director, notice: 'Director was successfully updated.' }
+          format.json { render :show, status: :ok, location: @director }
+        else
+          format.html { render :edit }
+          format.json { render json: @director.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to directors_path
     end
   end
 
   # DELETE /directors/1
   # DELETE /directors/1.json
   def destroy
-    @director.destroy
-    respond_to do |format|
-      format.html { redirect_to directors_url, notice: 'Director was successfully destroyed.' }
-      format.json { head :no_content }
+    if user_signed_in?
+      @director.destroy
+      respond_to do |format|
+        format.html { redirect_to directors_url, notice: 'Director was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to directors_path
     end
   end
 

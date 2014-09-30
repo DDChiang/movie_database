@@ -20,67 +20,88 @@ class MoviesController < ApplicationController
 
   # GET /movies/new
   def new
-    @movie = Movie.new
-    @genres = Genre.all
+    if user_signed_in?
+      @movie = Movie.new
+      @genres = Genre.all
+    else
+      redirect_to movies_path
+    end
   end
 
   # GET /movies/1/edit
   def edit
-    @movie = Movie.find(params[:id])
-    @genres = Genre.all
+    if user_signed_in?
+      @movie = Movie.find(params[:id])
+      @genres = Genre.all
+    else
+      redirect_to movies_path
+    end
   end
 
   # POST /movies
   # POST /movies.json
   def create
-    @movie = Movie.new(movie_params)
-    respond_to do |format|
-      @genres = Genre.all
-      @genres.each do |g|
-        if (params[g.name] != nil)
-          @movie.genres << g
+    if user_signed_in?
+      @movie = Movie.new(movie_params)
+      respond_to do |format|
+        @genres = Genre.all
+        @genres.each do |g|
+          if (params[g.name] != nil)
+            @movie.genres << g
+          end
+        end
+        if @movie.save
+          format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
+          format.json { render :show, status: :created, location: @movie }
+        else
+          format.html { render :new }
+          format.json { render json: @movie.errors, status: :unprocessable_entity }
         end
       end
-      if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
-        format.json { render :show, status: :created, location: @movie }
-      else
-        format.html { render :new }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
+    else
+      redirect_to movies_path
     end
   end
 
   # PATCH/PUT /movies/1
   # PATCH/PUT /movies/1.json
   def update
-    @genres = Genre.all
-    respond_to do |format|
-      if @movie.update(movie_params)
-        @movie.genres.destroy_all
-        @genres.each do |g|
-          if (params[g.name] != nil)
-            @movie.genres.push(g)
+    if user_signed_in?
+      @genres = Genre.all
+      respond_to do |format|
+        if @movie.update(movie_params)
+          @movie.genres.destroy_all
+          @genres.each do |g|
+            if (params[g.name] != nil)
+              @movie.genres.push(g)
+            end
           end
+          format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
+          format.json { render :show, status: :ok, location: @movie }
+        else
+          format.html { render :edit }
+          format.json { render json: @movie.errors, status: :unprocessable_entity }
         end
-        format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
-        format.json { render :show, status: :ok, location: @movie }
-      else
-        format.html { render :edit }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
+    else
+      redirect_to movies_path
     end
   end
 
   # DELETE /movies/1
   # DELETE /movies/1.json
   def destroy
-    @movie = Movie.find(params[:id])
-    @movie.destroy
-    respond_to do |format|
-      format.html { redirect_back_or movies_path }
-	#from user profile or from movies_path
-      format.json { head :no_content }
+    if current_user.try(:admin?)
+      @movie = Movie.find(params[:id])
+      @movie.destroy
+      respond_to do |format|
+        format.html { redirect_back_or movies_path }
+  	#from user profile or from movies_path
+        format.json { head :no_content }
+      end
+    else
+       #TODO flag, take in reason why, have admin go through later
+      redirect_to movies_path
     end
   end
 
