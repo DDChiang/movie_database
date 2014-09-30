@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Review for Movie:</strong>
+  <strong><%= link_to @rating.user.chosen_name, @rating.user %>'s Review for Movie:</strong>
   <%= Movie.find(@rating.movie_id).name %>
 </p>
 

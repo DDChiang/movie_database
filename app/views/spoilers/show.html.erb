@@ -3,7 +3,7 @@
 </div>
 <p>
   <strong>Synopsis:</strong><br>
-  <%= @spoiler.synopsis %>
+  <%= simple_format h @spoiler.synopsis %>
 </p>
 
 <% if user_signed_in? %>
