@@ -18,7 +18,7 @@
       <%= link_to "Create a new spoiler", new_spoiler_path %> 
     <% else %>
       <%= link_to "Synopsis", @movie.spoiler %>:<br><br>
-      <%= @movie.spoiler.synopsis %>
+      <%= simple_format h @movie.spoiler.synopsis %>
       <div id="movie_synopsis_edit_link">
         <% if user_signed_in? %>
           <%= link_to "Edit synopsis", edit_spoiler_path(@movie.spoiler) %>
