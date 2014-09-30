@@ -1,31 +1,35 @@
-<h1>Listing roles</h1>
+<h1>Roles</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Actor</th>
-      <th>Movie</th>
-      <th>Slug</th>
-      <th>Name</th>
+      <th><%=link_to "Who (Actor)", actors_path %></th>
+      <th><a>What</a></th>
+      <th><%= link_to "Movie (Where)", movies_path %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @roles.each do |role| %>
+      <% if role.actor && role.movie %>
       <tr>
-        <td><%= role.actor_id %></td>
-        <td><%= role.movie_id %></td>
-        <td><%= role.slug %></td>
+        <td><%= "#{role.movie.name}" %></td>
+        <td><%= "#{role.actor.first role.actor.last}" %></td>
         <td><%= role.name %></td>
-        <td><%= link_to 'Show', role %></td>
-        <td><%= link_to 'Edit', edit_role_path(role) %></td>
-        <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if user_signed_in? %>
+          <td><%= link_to 'Show', role %></td>
+          <td><%= link_to 'Edit', edit_role_path(role) %></td>
+          <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Role', new_role_path %>
+<% if user_signed_in? %>
+  <%= link_to 'New Role', new_role_path %>
+<% end %>

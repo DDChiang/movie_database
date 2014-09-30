@@ -20,14 +20,19 @@
 8 +- Add authorization
     +-admin
     +-current_user == user
-    - remove links not pertinent to current authority.
-
+    +- remove links not pertinent to current authority.
+    - Test links are removed
+    - Test links for admin   
+- Roles: destroy if actor/movie destroyed
+- Rating
+  - #new page
+  - update rating.present(:boolean) and use it
+- Flagging system for ratings, spoilers, users, movies
 -Remember! Style the version control
 - If possible duplicate records found, show. provide suggestions and links.
 - Have users first encounter search for actors/directors/movies. If not found, can add.
         - Search functionality
 - Put movies/actors/directors to approval process	
-- Ratings#new page
 - Complete Glogs
   - Add index.
 - Fix Route names
@@ -43,3 +48,4 @@
 
 - Trim versions table to not save anything older than a week.
 - Add books and authors
+- Improve link coherence

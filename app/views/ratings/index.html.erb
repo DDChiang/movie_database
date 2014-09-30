@@ -21,8 +21,10 @@
         <td><%= rating.stars %></td>
         <td><%= rating.review_present %></td>
         <td><%= link_to 'Show', rating %></td>
-        <td><%= link_to 'Edit', edit_rating_path(rating) %></td>
-        <td><%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.try(:admin?) || current_user.try(:id) == rating.user_id %>
+          <td><%= link_to 'Edit', edit_rating_path(rating) %></td>
+          <td><%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +32,8 @@
 
 <br>
 
-<%= link_to 'New Rating? First, go choose your movie', movies_path %>
+<% if user_signed_in? %>
+  <%= link_to 'New Rating? First, go choose your movie', movies_path %>
+<% else %>
+  <%= link_to "Sign in to add a critique to a movie!", new_user_session_path %>
+<% end %>

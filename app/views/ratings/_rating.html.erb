@@ -1,18 +1,16 @@
-<% if rating != []  && rating != nil && !(rating.user == nil)%>
 <div id="rating_<%=rating.id%>">
   <div id="rating_stars">
-    <%= rating.stars %>
+  Stars:  <%= rating.stars %>
   </div>
   <div id="review">
+  Review:<br>
     <%= rating.review %>
   </div>
   <div id="rating_info">
     <%= rating.created_at %> 
   </div>
-  <% if current_user != nil && rating.user != nil && current_user.id == rating.user.id %>
+  <% if current_user.try(:admin?) || current_user.try(:id) == rating.user_id %>
     <%= link_to "edit", edit_rating_path(rating) %>
-  <% end %>
     <%= link_to "delete", rating, method: :delete, data: { confirm: "Are you sure?"} %>
+  <% end %>
 </div>
-next
-<% end %>

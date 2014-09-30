@@ -12,11 +12,12 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.chosen_name %></td>
+        <td><%= link_to user.chosen_name, user %></td>
         <td><%= user.description %></td>
-        <td><%= link_to 'Show', user %></td>
+      <% if current_user.try(:admin?) || current_user.try(:id) == user.id %>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+     <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +25,6 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<% if !user_signed_in? %>
+<%= link_to 'Register as new user', new_user_registration_path %>
+<% end %>

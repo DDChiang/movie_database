@@ -1,15 +1,9 @@
 <p id="notice"><%= notice %></p>
-<% if @actor.stage_name %>
+<% if @actor.stage_name != nil && !!@actor.stage_name.match(/[^\s]/) %>
   Also known as <%= @actor.stage_name %>
 <% end %>
 <p>
-  <strong>First:</strong>
-  <%= @actor.first %>
-</p>
-
-<p>
-  <strong>Last:</strong>
-  <%= @actor.last %>
+  <%= @actor.first %> <%= @actor.last %>
 </p>
 
 <p>
@@ -17,5 +11,7 @@
   <%= @actor.birthday %>
 </p>
 
-<%= link_to 'Edit', edit_actor_path(@actor) %> |
+<% if user_signed_in? %>
+  <%= link_to 'Edit', edit_actor_path(@actor) %> |
+<% end %>
 <%= link_to 'Back', actors_path %>

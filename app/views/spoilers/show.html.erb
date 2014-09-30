@@ -2,9 +2,11 @@
   Synopsis for: <%= link_to @movie.name, @movie  %>
 </div>
 <p>
-  <strong>Synopsis:</strong>
+  <strong>Synopsis:</strong><br>
   <%= @spoiler.synopsis %>
 </p>
 
-<%= link_to 'Edit', edit_spoiler_path(@spoiler.id) %> |
+<% if user_signed_in? %>
+  <%= link_to 'Edit', edit_spoiler_path(@spoiler.id) %> |
+<% end %>
 <%= link_to 'Back', spoilers_path %>

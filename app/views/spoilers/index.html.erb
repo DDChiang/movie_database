@@ -17,8 +17,10 @@
         <td><%= spoiler.user_id %></td>
         <td><%= spoiler.synopsis %></td>
         <td><%= link_to 'Show', spoiler %></td>
-        <td><%= link_to 'Edit', edit_spoiler_path(spoiler) %></td>
-        <td><%= link_to 'Destroy', spoiler, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if user_signed_in? %>
+          <td><%= link_to 'Edit', edit_spoiler_path(spoiler) %></td>
+          <td><%= link_to 'Flag', spoiler, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +28,5 @@
 
 <br>
 
-<%= link_to 'New Spoiler', new_spoiler_path %>
+
+<%= link_to 'Create a spoiler for a movie. See movies', movies_path %>

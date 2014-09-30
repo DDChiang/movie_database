@@ -13,5 +13,7 @@
 <div id="movie_ratings">
  <%= render @user.ratings %>
 </div>
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<% if current_user.try(:admin?) || current_user.try(:id) == @user.id %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
 <%= link_to 'Other users', users_path %>

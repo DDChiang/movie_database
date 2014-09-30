@@ -1,24 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Actor:</strong>
-  <%= @role.actor_id %>
-</p>
-
-<p>
-  <strong>Movie:</strong>
-  <%= @role.movie_id %>
-</p>
-
-<p>
-  <strong>Slug:</strong>
-  <%= @role.slug %>
-</p>
-
-<p>
   <strong>Name:</strong>
   <%= @role.name %>
 </p>
 
-<%= link_to 'Edit', edit_role_path(@role) %> |
+<% if user_signed_in? %>
+  <%= link_to 'Edit', edit_role_path(@role) %> |
+<% end %>
 <%= link_to 'Back', roles_path %>

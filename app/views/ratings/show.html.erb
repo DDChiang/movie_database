@@ -1,29 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @rating.user_id %>
+  <strong>Review for Movie:</strong>
+  <%= Movie.find(@rating.movie_id).name %>
 </p>
 
 <p>
-  <strong>Movie:</strong>
-  <%= @rating.movie_id %>
+Stars: <%= @rating.stars %>
 </p>
-
 <p>
-  <strong>Review:</strong>
+  <strong>Critique:</strong><br>
   <%= @rating.review %>
 </p>
 
-<p>
-  <strong>Stars:</strong>
-  <%= @rating.stars %>
-</p>
-
-<p>
-  <strong>Review present:</strong>
-  <%= @rating.review_present %>
-</p>
-
-<%= link_to 'Edit', edit_rating_path(@rating) %> |
+<% if current_user.try(:admin?) || current_user.try(:id) == @rating.user_id %>
+  <%= link_to 'Edit', edit_rating_path(@rating) %> |
+<% end %>
 <%= link_to 'Back', @movie %>
