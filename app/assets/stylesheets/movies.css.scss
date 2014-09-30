@@ -1,3 +1,38 @@
 // Place all the styles related to the Movies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/******* movie form edit ******/
+input#movie_name {
+  width: 40%;
+}
+textarea#movie_teaser {
+  width: 80%;
+}
+/**** movie show page *******/
+div#movie_show {
+  width: 100%;
+}
+div#movie_left_side {
+  width: 50%;
+  float: left;
+}
+div#movie_right_side {
+  width: 40%;
+  float: left;
+}
+div#movie_info {
+  border-bottom: 1px solid gray;
+  padding-bottom: 15px;
+}
+div#movie_synopsis {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid gray;
+}
+div#movie_ratings {
+  padding-top: 15px;
+}
+div#your_movie_rating {
+  padding-bottom: 15px;
+  border-bottom: 1px solid gray;
+}

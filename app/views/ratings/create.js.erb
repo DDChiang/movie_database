@@ -2,7 +2,10 @@
 
 
 $(function(){
-  var html = "<%= escape_javascript(render @rating) %>";
-  $("#movie_ratings").prepend(html);
-  $("#create_rating").hide();
+  var html = "<%= escape_javascript(render partial: "ratings/create_rating"), locals: { movie: movie} %>";
+  $("#your_movie_rating").html(html)
+  var your_rating = "<%= escape_javascript(render @rating) %>"
+  $("#movie_ratings").prepend(your_rating);
 });
+
+

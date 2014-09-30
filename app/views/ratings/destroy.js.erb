@@ -1,11 +1,9 @@
-<% @rating = Rating.where('user_id' => 4, 'movie_id' => 3).first %>
-  Parameters: {"authenticity_token"=>"D+C9DoGQOxPbTwrCLbPyQ4U/lA590Mo2xJOpzwmvU0w=", "id"=>"11"}
+<% @rating = Rating.find(params[:id]) %>
 
 
 $(function(){
-  var html = "<%= escape_javascript(render @rating) %>";
-  $("#movie_ratings").prepend(html);
-  $("#create_rating").show();
-  $("#rating_<%=@id%>").hide();
+  var html = "<%= escape_javascript(render partial: "ratings/create_rating") %>";
+  $("#your_movie_rating").html(html)
+  $("#past_reviews_<%=@rating.id%>").hide();
 });
 

@@ -1,50 +1,50 @@
 <p id="notice"><%= notice %></p>
-
-<div style="border: 1px solid black;">
-<p>
-  <%= @movie.name %>
-</p>
-
-<p>
-  <%= @movie.opening_day %>
-</p>
-
-<p>
-  <%= @movie.teaser %>
-</p>
-Posted by <%= link_to @movie.user.chosen_name, @movie.user %>
-</div>
-<div id="movie_synopsis">
-  <% if @movie.spoiler == nil %>
-    <%= link_to "Create a new spoiler", new_spoiler_path %> 
-  <% else %>
-    <%= link_to "Synopsis", @movie.spoiler %>:<br>
-    <%= @movie.spoiler.synopsis %>
-  <% end %>
-</div>
-<% @ratings = @movie.ratings %>
-<% @ratings_users = @ratings.map { |r| r.user.id }%>
-<br>
-<% if current_user != nil %>
-  <% if @ratings_users.include?(current_user.id) %>
-    Already reviewed this movie...
-    <div style="display:none;" id="create_rating">
-      <%= render partial: "movies/movie_rating", locals: { movie: @movie} %>
+<div id="movie_show">
+<div id="movie_left_side">
+  <div id="movie_info">
+    <p>
+      <%= @movie.name %>
+    </p>
+    <p>
+      <%= @movie.opening_day %>
+    </p>
+    <p>
+      <%= @movie.teaser %>
+    </p>
+    Posted by <%= link_to @movie.user.chosen_name, @movie.user %>
+  </div>
+  <div id="movie_synopsis">
+    <% if @movie.spoiler == nil %>
+      <%= link_to "Create a new spoiler", new_spoiler_path %> 
+    <% else %>
+      <%= link_to "Synopsis", @movie.spoiler %>:<br><br>
+      <%= @movie.spoiler.synopsis %>
+    <% end %>
+    <br>
+    <br>
+    <div id="movie_synopsis_edit_link">
+      <% if user_signed_in? %>
+        <%= link_to "Edit synopsis", edit_spoiler_path(@movie.spoiler) %>
+      <% end %>
     </div>
-  <% else %>
-    <div id="create_rating">
-      Review this movie:
-      <%= render partial: "movies/movie_rating", locals: { movie: @movie} %>
-    </div>
-  <% end %>
-<% end %>
-<div id="movie_ratings">
-  RATINGS:
- <%= render @ratings %>
+  </div>
+  <% @ratings = @movie.ratings %>
+  <% @ratings_users = @ratings.map { |r| r.user.id }%>
+  <br>
+  <div id="your_movie_rating">
+    <%= render partial: "ratings/create_rating", locals: {movie: @movie} %>
+  </div>
+  <div id="movie_ratings">
+   <%= render @ratings %>
+  </div>
+  <div id="movie_links">
+    <% if user_signed_in? %>
+      <%= link_to 'Edit Movie Data', edit_movie_path(@movie) %> |
+    <% end %>
+    <%= link_to 'Back', movies_path %>
+  </div>
 </div>
-<div id="movie_links">
-  <% if user_signed_in? %>
-    <%= link_to 'Edit Movie Data', edit_movie_path(@movie) %> |
-  <% end %>
-  <%= link_to 'Back', movies_path %>
+<div id="movie_right_side">
+Social Media Not Present Yet.
+</div>
 </div>
