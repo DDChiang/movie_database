@@ -16,8 +16,8 @@
     <%= f.text_field :name, :autofocus => true %>
   </div>
   <div class="field">
-    <%= f.label :opening_day %><br>
-    <%= f.date_select :opening_day %>
+    <%= f.label "Release Date" %><br>
+    <%= f.date_select :opening_day, :end_year => Date.today.year + 3, :start_year => 1890 %>
   </div>
   <div class="field">
     <%= f.label :teaser %><br>
