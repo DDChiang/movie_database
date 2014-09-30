@@ -13,26 +13,30 @@ div#movie_show {
   width: 100%;
 }
 div#movie_left_side {
-  width: 50%;
+  width: 65%;
   float: left;
 }
 div#movie_right_side {
-  width: 40%;
+  width: 35%;
   float: left;
 }
 div#movie_info {
   border-bottom: 1px solid gray;
-  padding-bottom: 15px;
+  padding-bottom: 1em;
 }
 div#movie_synopsis {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 1em;
+  padding-bottom: 1em;
   border-bottom: 1px solid gray;
 }
 div#movie_ratings {
-  padding-top: 15px;
+  padding-top: 1em;
 }
 div#your_movie_rating {
-  padding-bottom: 15px;
+  padding-bottom: 1em;
   border-bottom: 1px solid gray;
+}
+
+div#movie_links {
+  padding-bottom: 1em;
 }
